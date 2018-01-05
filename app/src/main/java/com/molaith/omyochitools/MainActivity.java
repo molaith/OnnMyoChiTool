@@ -60,11 +60,16 @@ public class MainActivity extends AppCompatActivity {
                 if (actionId== EditorInfo.IME_ACTION_SEARCH){
                     stringBuilder.delete(0,stringBuilder.length());
                     updateResuslt();
-                    List<Shikikami> result=ShikiKamiUtil.getResult(edinput.getText().toString());
-                    stringBuilder.append("找到"+result.size()+"个结果\n");
-                    updateResuslt();
-                    stringBuilder.append(ShikiKamiUtil.parseResult(result,false,false));
-                    updateResuslt();
+                    String texts=edinput.getText().toString().trim();
+                    if (texts.contains(",") || texts.contains("，")){
+
+                    }else {
+                        List<Shikikami> result=ShikiKamiUtil.getResult(texts);
+                        stringBuilder.append("找到"+result.size()+"个结果\n");
+                        updateResuslt();
+                        stringBuilder.append(ShikiKamiUtil.parseResult(result,false,false,false));
+                        updateResuslt();
+                    }
                     return true;
                 }
                 return false;

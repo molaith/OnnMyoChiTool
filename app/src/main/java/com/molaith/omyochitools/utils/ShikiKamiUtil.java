@@ -13,7 +13,9 @@ import com.molaith.omyochitools.domin.YoukaiChallenge;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by molaith on 2017/12/20.
@@ -56,19 +58,19 @@ public class ShikiKamiUtil {
                 chapter.index = lines[startIndex].trim();
             }
             boolean challengestarted = false;
-            String yokaiName="";
+            String yokaiName = "";
             for (int i = startIndex + 1; i < lines.length; i++) {
                 if ((i & 1) == 0) {
                     if (challengestarted) {
-                        dealWithShikiKamiString(false,"",false,"",false,"",false,"","",
-                                true,chapter.index,yokaiName,lines[i]);
+                        dealWithShikiKamiString(false, "", false, "", false, "", false, "", "",
+                                true, chapter.index, yokaiName, lines[i]);
                     } else {
                         if (lines[i].contains(",")) {
                             String[] shikikamis = lines[i].split(",");
                             for (String currentSKKM : shikikamis) {
                                 Shikikami shikikami = new Shikikami();
-                                shikikami.chapterIndex=chapter.index;
-                                shikikami.from=yokaiName;
+                                shikikami.chapterIndex = chapter.index;
+                                shikikami.from = yokaiName;
                                 shikikami.name = currentSKKM.split("×")[0].trim();
                                 if (currentSKKM.split("×")[1].contains("模式")) {
                                     if (currentSKKM.split("×")[1].contains("简单模式")) {
@@ -85,8 +87,8 @@ public class ShikiKamiUtil {
                             }
                         } else {
                             Shikikami shikikami = new Shikikami();
-                            shikikami.chapterIndex=chapter.index;
-                            shikikami.from=yokaiName;
+                            shikikami.chapterIndex = chapter.index;
+                            shikikami.from = yokaiName;
                             shikikami.name = lines[i].split("×")[0].trim();
                             if (lines[i].split("×")[1].contains("模式")) {
                                 if (lines[i].split("×")[1].contains("简单模式")) {
@@ -107,10 +109,10 @@ public class ShikiKamiUtil {
                         challengestarted = true;
                     } else {
                         if (challengestarted) {
-                            dealWithShikiKamiString(false,"",false,"",false,"",false,"","",
-                                    true,chapter.index,yokaiName,lines[i]);
+                            dealWithShikiKamiString(false, "", false, "", false, "", false, "", "",
+                                    true, chapter.index, yokaiName, lines[i]);
                         } else {
-                            yokaiName=lines[i].trim();
+                            yokaiName = lines[i].trim();
                         }
                     }
                 }
@@ -131,8 +133,8 @@ public class ShikiKamiUtil {
             huinn.shikikamiList = new ArrayList<>();
             for (int i = 2; i < huinnList.length; i++) {
                 if ((i & 1) == 0) {
-                    dealWithShikiKamiString(true,huinn.name,false,"",false,"",
-                            false,"","",false,"", "", huinnList[i]);
+                    dealWithShikiKamiString(true, huinn.name, false, "", false, "",
+                            false, "", "", false, "", "", huinnList[i]);
                 }
             }
         }
@@ -146,24 +148,24 @@ public class ShikiKamiUtil {
         String[] chiList = karumas[0].trim().split("\n");
         for (int i = 1; i < chiList.length; i++) {
             if ((i & 1) == 0) {
-                dealWithShikiKamiString(false,"",true,"痴",false,"",
-                        false,"","",false,"","", chiList[i]);
+                dealWithShikiKamiString(false, "", true, "痴", false, "",
+                        false, "", "", false, "", "", chiList[i]);
             }
         }
 
         String[] chenList = karumas[1].trim().split("\n");
         for (int i = 1; i < chenList.length; i++) {
             if ((i & 1) == 0) {
-                dealWithShikiKamiString(false,"",true,"嗔",false,"",
-                        false,"","",false,"","", chiList[i]);
+                dealWithShikiKamiString(false, "", true, "嗔", false, "",
+                        false, "", "", false, "", "", chiList[i]);
             }
         }
 
         String[] tanList = karumas[2].trim().split("\n");
         for (int i = 1; i < tanList.length; i++) {
             if ((i & 1) == 0) {
-                dealWithShikiKamiString(false,"",true,"贪",false,"",
-                        false,"","",false,"","", chiList[i]);
+                dealWithShikiKamiString(false, "", true, "贪", false, "",
+                        false, "", "", false, "", "", chiList[i]);
             }
         }
     }
@@ -188,9 +190,9 @@ public class ShikiKamiUtil {
                     stepCount++;
                 } else {
                     if (!challenges[i].contains("回合")) {
-                        Log.d("molaith","challenges:"+challenges[i]);
-                        dealWithShikiKamiString(false,"",false,"",false,"",
-                                true,youkaiChallenge.name,"第"+stepCount+"层",false,"","",challenges[i]);
+                        Log.d("molaith", "challenges:" + challenges[i]);
+                        dealWithShikiKamiString(false, "", false, "", false, "",
+                                true, youkaiChallenge.name, "第" + stepCount + "层", false, "", "", challenges[i]);
                     }
                 }
             }
@@ -198,7 +200,7 @@ public class ShikiKamiUtil {
     }
 
     private static void dealWithShikiKamiString(boolean isYokiHuinn, String huinnName, boolean isKarumaHaraNoHono, String karumaHaraNoHonoName, boolean isYamataNoOrochi, String yamataNoOrochiStage,
-                                                boolean isSecretYokai,String secretName,String secretStage,boolean isChallenge,String chapterIndex,String yokaiName,String shikikamiString) {
+                                                boolean isSecretYokai, String secretName, String secretStage, boolean isChallenge, String chapterIndex, String yokaiName, String shikikamiString) {
         if (shikikamiList == null) {
             shikikamiList = new ArrayList<>();
         }
@@ -218,7 +220,7 @@ public class ShikiKamiUtil {
                 shikikami.count = Integer.parseInt(shikikamiString.split("×")[1].trim());
                 shikikamiList.add(shikikami);
             }
-        }else if (isKarumaHaraNoHono){
+        } else if (isKarumaHaraNoHono) {
             if (shikikamiString.contains(",")) {
                 for (String currentSKKM : shikikamiString.split(",")) {
                     Shikikami shikikami = new Shikikami();
@@ -234,7 +236,7 @@ public class ShikiKamiUtil {
                 shikikami.count = Integer.parseInt(shikikamiString.split("×")[1].trim());
                 shikikamiList.add(shikikami);
             }
-        }else if (isYamataNoOrochi){
+        } else if (isYamataNoOrochi) {
             if (shikikamiString.contains(",")) {
                 for (String currentSKKM : shikikamiString.split(",")) {
                     Shikikami shikikami = new Shikikami();
@@ -250,12 +252,12 @@ public class ShikiKamiUtil {
                 shikikami.count = Integer.parseInt(shikikamiString.split("×")[1].trim());
                 shikikamiList.add(shikikami);
             }
-        }else if (isSecretYokai){
+        } else if (isSecretYokai) {
             if (shikikamiString.contains(",")) {
                 for (String currentSKKM : shikikamiString.split(",")) {
                     Shikikami shikikami = new Shikikami();
                     shikikami.secretYokaiName = secretName;
-                    shikikami.secretYokaiStage=secretStage;
+                    shikikami.secretYokaiStage = secretStage;
                     shikikami.name = currentSKKM.split("×")[0].trim();
                     shikikami.count = Integer.parseInt(currentSKKM.split("×")[1].trim());
                     shikikamiList.add(shikikami);
@@ -263,16 +265,16 @@ public class ShikiKamiUtil {
             } else {
                 Shikikami shikikami = new Shikikami();
                 shikikami.secretYokaiName = secretName;
-                shikikami.secretYokaiStage=secretStage;
+                shikikami.secretYokaiStage = secretStage;
                 shikikami.name = shikikamiString.split("×")[0].trim();
                 shikikami.count = Integer.parseInt(shikikamiString.split("×")[1].trim());
                 shikikamiList.add(shikikami);
             }
-        }else {
+        } else {
             if (shikikamiString.contains(",")) {
                 for (String currentSKKM : shikikamiString.split(",")) {
                     Shikikami shikikami = new Shikikami();
-                    shikikami.from=yokaiName;
+                    shikikami.from = yokaiName;
                     shikikami.chapterIndex = chapterIndex;
                     shikikami.name = currentSKKM.split("×")[0].trim();
                     shikikami.count = Integer.parseInt(currentSKKM.split("×")[1].trim());
@@ -280,9 +282,9 @@ public class ShikiKamiUtil {
                 }
             } else {
                 Shikikami shikikami = new Shikikami();
-                shikikami.from=yokaiName;
+                shikikami.from = yokaiName;
                 shikikami.chapterIndex = chapterIndex;
-                shikikami.isChallenge=isChallenge;
+                shikikami.isChallenge = isChallenge;
                 shikikami.name = shikikamiString.split("×")[0].trim();
                 shikikami.count = Integer.parseInt(shikikamiString.split("×")[1].trim());
                 shikikamiList.add(shikikami);
@@ -292,45 +294,77 @@ public class ShikiKamiUtil {
 
     public static List<Shikikami> getResult(String searchText) {
         List<Shikikami> result = new ArrayList<>();
-        if (searchText.contains(",") || searchText.contains("，")) {
-        } else {
-            if (shikikamiList!=null){
-                for (Shikikami shikikami:shikikamiList) {
-                    if (shikikami.name.contains(searchText)){
-                        result.add(shikikami);
-                    }
+        if (shikikamiList != null) {
+            for (Shikikami shikikami : shikikamiList) {
+                if (shikikami.name.contains(searchText)) {
+                    result.add(shikikami);
                 }
             }
         }
         return result;
     }
 
-    public static String parseResult(List<Shikikami> shikikamiResult,boolean sushibest,boolean timebest){
-        StringBuilder sb=new StringBuilder();
-        String yokihuinn="";
-        for (Shikikami current:shikikamiResult) {
-            if (current.isYokihuinn()){
-                sb.append(current.yokihuinnName+" 妖气封印 "+current.count+"个\n");
-            }
-            if (current.isInKarumaHaraNoHonoName()){
-                sb.append("业原火 "+current.karumaHaraNoHonoName+"之卷轴 "+current.count+"个\n");
-            }
-            if (current.isInyamataNoOrochi()){
-                sb.append("八岐大蛇第"+current.yamataNoOrochiStage+"层 "+current.count+"个\n");
-            }
-            if (current.isInSecretYokai()){
-                sb.append("妖怪秘闻 "+current.secretYokaiName+" "+current.secretYokaiStage+" "+current.count+"个\n");
-            }
 
-            if (current.isChallenge){
-                sb.append(current.chapterIndex+" 妖怪挑战 "+current.count+"个\n");
-            }else {
-                if (!TextUtils.isEmpty(current.chapterIndex)){
-                    sb.append(current.chapterIndex+" "+current.from+" "+(current.model.equals("困难模式")?"(困难)":"")+current.count+"个\n");
+
+    public static String getCombinedResult(String searchText) {
+        HashMap<String,List<Shikikami>> combine=new HashMap<>();
+        if (searchText.contains(",")){
+            String[] shikikamis=searchText.split(",");
+            for (String current:shikikamis) {
+                List<Shikikami> resultCurrent=new ArrayList<>();
+                for (Shikikami shikikami:shikikamiList) {
+                    if (shikikami.name.contains(current)){
+                        resultCurrent.add(shikikami);
+                    }
+                }
+                if (resultCurrent.size()>0){
+                    combine.put(current,resultCurrent);
+                }
+            }
+        }else if (searchText.contains("，")){
+            String[] shikikamis=searchText.split("，");
+        }
+        return parseResult(combine,false,false,false);
+    }
+
+    public static String parseResult(HashMap<String,List<Shikikami>> combine,boolean sushibest, boolean timebest, boolean atleastTwo){
+        Set<String> keys = combine.keySet();
+        StringBuilder sb = new StringBuilder();
+        for (String key : keys) {
+            sb.append(key+":\n");
+            sb.append(parseResult(combine.get(key),sushibest,timebest,atleastTwo));
+        }
+        return sb.toString();
+    }
+
+    public static String parseResult(List<Shikikami> shikikamiResult, boolean sushibest, boolean timebest, boolean atleastTwo) {
+        StringBuilder sb = new StringBuilder();
+        String yokihuinn = "";
+        for (Shikikami current : shikikamiResult) {
+            if (atleastTwo && current.count >= 2) {
+                if (current.isYokihuinn()) {
+                    sb.append(current.yokihuinnName + " 妖气封印 " + current.count + "个\n");
+                }
+                if (current.isInKarumaHaraNoHonoName()) {
+                    sb.append("业原火 " + current.karumaHaraNoHonoName + "之卷轴 " + current.count + "个\n");
+                }
+                if (current.isInyamataNoOrochi()) {
+                    sb.append("八岐大蛇第" + current.yamataNoOrochiStage + "层 " + current.count + "个\n");
+                }
+                if (current.isInSecretYokai()) {
+                    sb.append("妖怪秘闻 " + current.secretYokaiName + " " + current.secretYokaiStage + " " + current.count + "个\n");
+                }
+
+                if (current.isChallenge) {
+                    sb.append(current.chapterIndex + " 妖怪挑战 " + current.count + "个\n");
+                } else {
+                    if (!TextUtils.isEmpty(current.chapterIndex)) {
+                        sb.append(current.chapterIndex + " " + current.from + " " + (current.model.equals("困难模式") ? "(困难)" : "") + current.count + "个\n");
+                    }
                 }
             }
         }
-        if (TextUtils.isEmpty(sb.toString())){
+        if (TextUtils.isEmpty(sb.toString())) {
             sb.append("没找到该妖怪哟!\n");
         }
         return sb.toString();

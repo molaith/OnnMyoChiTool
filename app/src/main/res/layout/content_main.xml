@@ -81,12 +81,20 @@
                 android:layout_marginTop="10dp"
                 android:text="体力最少" />
 
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/cb_at_least"
+                style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cb_sushi_best"
+                android:layout_marginTop="10dp"
+                android:text="不显示少于两个的结果" />
 
             <TextView
                 android:id="@+id/tv_result"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/cb_sushi_best"
+                android:layout_below="@id/cb_at_least"
                 android:padding="10dp"
                 android:textSize="13sp" />
         </RelativeLayout>
