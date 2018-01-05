@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.molaith.omyochitools.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/layout_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/ed_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入式神名字，多个式神，名字用‘,’隔开"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_tips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ed_input"
+                    android:layout_centerHorizontal="true"
+                    android:text="式神名和线索不能同时作为搜索条件，最多添加4个线索"
+                    android:textSize="10sp" />
+
+                <LinearLayout
+                    android:id="@+id/layout_clues"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_tips"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_add_clue"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/layout_clues"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="添加线索"
+                    android:textSize="11sp" />
+            </RelativeLayout>
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/cb_time_best"
+                style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_input"
+                android:layout_marginTop="20dp"
+                android:text="耗时最短" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/cb_sushi_best"
+                style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cb_time_best"
+                android:layout_marginTop="10dp"
+                android:text="体力最少" />
+
+
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/cb_sushi_best"
+                android:padding="10dp"
+                android:textSize="13sp" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
